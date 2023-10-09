@@ -17,14 +17,14 @@ use std::iter::{Chain, Once, Skip};
 /// ```
 #[macro_export]
 macro_rules! nem {
-    ($hk:expr => $hv:expr, $( $xk:expr => $xv:expr ),*) => {{
+    ($hk:expr => $hv:expr, $( $xk:expr => $xv:expr ),* $(,)?) => {{
         let mut tail = std::collections::HashMap::new();
         tail.insert($hk, $hv);
         $( tail.insert($xk, $xv); )*
         tail.remove(&$hk);
         $crate::NEMap { head_key: $hk, head_val: $hv, tail }
     }};
-    ($hk:expr => $hv:expr) => {
+    ($hk:expr => $hv:expr $(,)?) => {
         $crate::NEMap { head_key: $hk, head_val: $hv, tail: std::collections::HashMap::new() }
     }
 }

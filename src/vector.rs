@@ -25,12 +25,12 @@ use std::ops::{IndexMut, Not};
 /// ```
 #[macro_export]
 macro_rules! nev {
-    ($h:expr, $( $x:expr ),*) => {{
+    ($h:expr, $( $x:expr ),* $(,)?) => {{
         let mut tail = Vec::new();
         $( tail.push($x); )*
         $crate::NEVec { head: $h, tail }
     }};
-    ($h:expr) => {
+    ($h:expr $(,)?) => {
         $crate::NEVec { head: $h, tail: Vec::new() }
     }
 }

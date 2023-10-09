@@ -18,14 +18,14 @@ use std::iter::{Chain, Once, Skip};
 /// ```
 #[macro_export]
 macro_rules! nes {
-    ($h:expr, $( $x:expr ),*) => {{
+    ($h:expr, $( $x:expr ),* $(,)?) => {{
         let mut tail = std::collections::HashSet::new();
         tail.insert($h);
         $( tail.insert($x); )*
         tail.remove(&$h);
         $crate::NESet { head: $h, tail }
     }};
-    ($h:expr) => {
+    ($h:expr $(,)?) => {
         $crate::NESet { head: $h, tail: std::collections::HashSet::new() }
     }
 }
